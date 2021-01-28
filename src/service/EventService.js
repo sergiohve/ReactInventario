@@ -3,7 +3,7 @@ import axios from 'axios';
 export class EventService {
 
     getEvents() {
-        return axios.get('https://jsonplaceholder.typicode.com/todos/')
+        return axios.get('assets/demo/data/events.json')
             .then(res => res.data.data);
     }
 }
