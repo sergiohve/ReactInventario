@@ -3,7 +3,7 @@ import axios from 'axios'
 export class CountryService {
 
     getCountries() {
-        return axios.get('assets/demo/data/countries.json')
+        return axios.get('https://jsonplaceholder.typicode.com/todos/')
             .then(res => res.data.data);
     }
 }
