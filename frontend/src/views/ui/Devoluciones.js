@@ -43,14 +43,12 @@ const Devoluciones = () => {
   };
   return (
     <div>
-      <h2 className="card-title">
-        DEVOLUCIONES REALIZADAS
-        <h4>
-          En el módulo DEVOLUCIONES podrá ver el listado de todas las
-          devoluciones de compras y ventas realizadas. Además, podrá buscar
-          devoluciones por fecha.
-        </h4>
-      </h2>
+      <h2 className="card-title">DEVOLUCIONES REALIZADAS</h2>
+      <p className="card-title">
+        En el módulo DEVOLUCIONES podrá ver el listado de todas las devoluciones
+        de compras y ventas realizadas. Además, podrá buscar devoluciones por
+        fecha.
+      </p>
 
       <Card>
         <CardBody className="cont-">
@@ -100,7 +98,9 @@ const Devoluciones = () => {
                 </tbody>
               </>
             ) : (
-              <div className="sin-register">No hay registro de devoluciones</div>
+              <div className="sin-register">
+                No hay registro de devoluciones
+              </div>
             )}
           </Table>
         </CardBody>

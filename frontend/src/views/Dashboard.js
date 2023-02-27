@@ -18,16 +18,11 @@ const Starter = () => {
 
   return (
     <div>
-      {/***Top Cards***/}
-
-      {/***Table ***/}
       <Row>
         <Col lg="12">
           <ProjectTables modulos={modulos} />
         </Col>
       </Row>
-      {/***Blog Cards***/}
-     
     </div>
   );
 };

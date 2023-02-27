@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 import {
   Container,
   Row,
@@ -12,59 +13,70 @@ import {
   Input,
   Toast,
   ToastBody,
-  ToastHeader
+  ToastHeader,
 } from "reactstrap";
-
+import Electronica from "../assets/images/electronica.jpg";
 const Login = (props) => {
-  console.log("here");
+  const navigate = useNavigate();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoggedin, setLoggedin] = React.useState(false);
-
+  const [mensaje, setmensaje] = React.useState("");
+  localStorage.setItem("login", "No_logueado");
   const loginHandler = (ev) => {
     ev.preventDefault();
     if (!username || !password) {
       return;
     }
+    localStorage.setItem("login", "Logueado");
+    if (username == "Administrador" && password == "Administrador") {
+      return setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
+    }
+    setmensaje("El usuario o contraseña son incorrectos");
 
-    // email: "eve.holt@reqres.in",
-    // password: "cityslicka"
-    fetch("https://reqres.in/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: username,
-        password: password
+    /*try {
+      fetch("http://localhost:4000/api/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          correo: username,
+          password: password,
+        }),
       })
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("RESPONSE from login success ", data);
-        setLoggedin(true);
-      });
-
-    // console.log(username, password);
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("RESPONSE from login success ", data);
+          setLoggedin(true);
+        });
+    } catch (error) {
+      console.log(error);
+    }*/
   };
+ 
 
   return (
-    <Container>
+    <Container className="container">
       <Row>
         <Col>
           <Card>
+            <h2 className="center">Iniciar sesión</h2>
             <CardBody>
               <Form onSubmit={loginHandler}>
                 <FormGroup className="pb-2 mr-sm-2 mb-sm-0">
-                  <Label for="exampleEmail" className="mr-sm-2">
-                    Email
+                  <Label for="correo" className="mr-sm-2">
+                    Correo
                   </Label>
                   <Input
-                    type="email"
-                    name="email"
-                    id="exampleEmail"
-                    placeholder="something@idk.cool"
+                    type="text"
+                    name="correo"
+                    id="correo"
+                    placeholder="Correo"
                     onChange={(ev) => setUsername(ev.currentTarget.value)}
+                    required
                   />
                 </FormGroup>
                 <FormGroup className="pb-2 mr-sm-2 mb-sm-0">
@@ -79,33 +91,11 @@ const Login = (props) => {
                     onChange={(ev) => setPassword(ev.currentTarget.value)}
                   />
                 </FormGroup>
-                <Button type="submit" color="primary">
-                  Login
+                <div className="msg-alerta">{mensaje}</div>
+                <Button type="submit" color="primary" className="login">
+                  Ingresar
                 </Button>
               </Form>
-            </CardBody>
-          </Card>
-          <Card className="mt-5">
-            <CardBody>
-              {isLoggedin && (
-                <>
-                  <div>User is logged in on the system.</div>
-                  <div className="p-3 bg-success my-2 rounded">
-                    <Toast>
-                      <ToastHeader>Reactstrap</ToastHeader>
-                      <ToastBody>
-                        This is a toast on a success background — check it out!
-                      </ToastBody>
-                    </Toast>
-                  </div>
-                </>
-              )}
-
-              {!isLoggedin && (
-                <div>
-                A ver si te logueas con exito
-                </div>
-              )}
             </CardBody>
           </Card>
         </Col>

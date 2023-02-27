@@ -1,6 +1,6 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
-import user1 from "../assets/images/users/user4.jpg";
+import user1 from "../assets/images/users/user1.jpg";
 import probg from "../assets/images/bg/download.jpg";
 
 const navigation = [
@@ -9,11 +9,11 @@ const navigation = [
     href: "/dashboard",
     icon: "bi bi-speedometer2"
   },
-  {
+  /*{
     title: "Administración",
     href: "/administracion",
     icon: "bi bi-bell",
-  },
+  },*/
   {
     title: "Productos",
     href: "/productos",
@@ -30,8 +30,8 @@ const navigation = [
     icon: "bi bi-card-text",
   },
   {
-    title: "Mov. en cajas",
-    href: "/cajas",
+    title: "Deudores",
+    href: "/deudores",
     icon: "bi bi-columns",
   },
   {
@@ -39,11 +39,7 @@ const navigation = [
     href: "/devoluciones",
     icon: "bi bi-layout-split",
   },
-  {
-    title: "Kardex",
-    href: "/kardex",
-    icon: "bi bi-textarea-resize",
-  },
+ 
   {
     title: "Reportes",
     href: "/reportes",
@@ -51,9 +47,14 @@ const navigation = [
   },
   {
     title: "Configuraciones",
-    href: "/about",
+    href: "/settings",
     icon: "bi bi-people",
   },
+  {
+    title: "Cerrar sesión",
+    href: "/logout",
+    icon: "bi bi-box-arrow-left",
+  }
  
 ];
 
@@ -71,7 +72,7 @@ const Sidebar = () => {
         style={{ background: `url(${probg}) no-repeat` }}
       >
         <div className="p-3 d-flex">
-          <img src={user1} alt="user" width="50" className="rounded-circle" />
+          <img src={user1} alt="user" width="50" className="rounded-circle round" />
           <Button
             color="white"
             className="ms-auto text-white d-lg-none"
@@ -80,7 +81,7 @@ const Sidebar = () => {
             <i className="bi bi-x"></i>
           </Button>
         </div>
-        <div className="bg-dark text-white p-2 opacity-75">Steave Rojer</div>
+        <div className="bg-dark text-white p-2 opacity-75">Mariemilys Herrera</div>
       </div>
       <div className="p-3 mt-2">
         <Nav vertical className="sidebarNav">

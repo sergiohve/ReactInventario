@@ -7,7 +7,7 @@ import user1 from "../../assets/images/users/user1.jpg";
 
 
 
-const Productos = () => {
+const Alerts = () => {
   const [productos, setProductos] = useState([]);
 
   const getProducts = async () => {
@@ -23,10 +23,10 @@ const Productos = () => {
     <div>
       <Card>
         <CardBody>
-          <CardTitle tag="h5">Lista de productos</CardTitle>
+          <CardTitle tag="h5">Lista de empleados</CardTitle>
         
 
-          <Table className="no-wrap align-middle" responsive borderless>
+          <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>
                 <th>Producto</th>
@@ -49,7 +49,7 @@ const Productos = () => {
                         height="45"
                       />
                       <div className="ms-3">
-                        <h6 className="mb-0">{pro.nombre}</h6>
+                        <h5 className="mb-0 name_pro">{pro.nombre}</h5>
                        
                       </div>
                     </div>
@@ -67,4 +67,4 @@ const Productos = () => {
   );
 };
 
-export default Productos;
+export default Alerts;

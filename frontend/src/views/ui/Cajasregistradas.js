@@ -179,9 +179,6 @@ const Cajasregistradas = () => {
             <Col>
               <div className="title-item">LISTA DE CAJAS</div>
             </Col>
-            <Col>
-              <div className="title-item">BUSCAR CAJA</div>
-            </Col>
           </Row>
         </CardBody>
       </Card>

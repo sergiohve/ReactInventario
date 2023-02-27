@@ -9,16 +9,16 @@ const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
 
-const Starter = lazy(() => import("../views/Starter.js"));
-const About = lazy(() => import("../views/About.js"));
-const Alerts = lazy(() => import("../views/ui/Alerts"));
-const Badges = lazy(() => import("../views/ui/Badges"));
-const Buttons = lazy(() => import("../views/ui/Buttons"));
-const Cards = lazy(() => import("../views/ui/Cards"));
-const Grid = lazy(() => import("../views/ui/Grid"));
+const Dashboard = lazy(() => import("../views/Dashboard.js"));
+const Settings = lazy(() => import("../views/Settings.js"));
+const Administracion = lazy(() => import("../views/ui/Administracion"));
+const Productos = lazy(() => import("../views/ui/Productos"));
+const Compras = lazy(() => import("../views/ui/Compras"));
+const Ventas = lazy(() => import("../views/ui/Ventas"));
+const Deudores = lazy(() => import("../views/ui/Deudores"));
 const Devoluciones = lazy(() => import("../views/ui/Devoluciones"));
 const Forms = lazy(() => import("../views/ui/Forms"));
-const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
+const Reportes = lazy(() => import("../views/ui/Reportes"));
 const Cajasregistradas = lazy(() => import("../views/ui/Cajasregistradas.js"));
 const Proveedores = lazy(() => import("../views/ui/Proveedores.js"));
 const Updatecaja = lazy(() => import("../views/ui/Updatecaja.js"));
@@ -30,20 +30,20 @@ const ThemeRoutes = [
     element: <FullLayout />,
     children: [
       { path: "/", element: <Navigate to="/login" /> },
-      { path: "/login", element: <Login /> },
-      { path: "/dashboard", exact: true, element: <Starter /> },
-      { path: "/about", exact: true, element: <About /> },
-      { path: "/administracion", exact: true, element: <Alerts /> },
-      { path: "/productos", exact: true, element: <Badges /> },
-      { path: "/compras", exact: true, element: <Buttons /> },
-      { path: "/ventas", exact: true, element: <Cards /> },
-      { path: "/cajas", exact: true, element: <Grid /> },
+      { path: "/", element: <Login /> },
+      { path: "/dashboard", exact: true, element: <Dashboard /> },
+      { path: "/settings", exact: true, element: <Settings /> },
+      { path: "/administracion", exact: true, element: <Administracion /> },
+      { path: "/productos", exact: true, element: <Productos /> },
+      { path: "/compras", exact: true, element: <Compras /> },
+      { path: "/ventas", exact: true, element: <Ventas /> },
+      { path: "/deudores", exact: true, element: <Deudores /> },
       { path: "/dashboard/cajas/cajasregistradas", exact: true, element: <Cajasregistradas /> },
       { path: "/dashboard/cajas/updatecaja", exact: true, element: <Updatecaja /> },
       { path: "/dashboard/proveedores", exact: true, element: <Proveedores /> },
       { path: "/devoluciones", exact: true, element: <Devoluciones /> },
       { path: "/kardex", exact: true, element: <Forms /> },
-      { path: "/reportes", exact: true, element: <Breadcrumbs /> },
+      { path: "/reportes", exact: true, element: <Reportes /> },
     ],
   },
 ];
