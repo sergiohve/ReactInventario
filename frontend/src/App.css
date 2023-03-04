@@ -1,3 +1,9 @@
+html{
+  overflow-y: scroll;
+  scrollbar-color: yellow #800080;
+  scrollbar-width: 10px;
+}
+
 .fix-header {
   position: fixed;
   z-index: 10;
@@ -8,6 +14,17 @@
   background-color: #005DA9;
   
 }
+.num{
+  width: 5px;
+}
+.search{
+  height: 50px;
+  width: 30%;
+  margin: 20px;
+  margin-bottom: -30px;
+  margin-left: auto;
+  right: 0;
+}
 .pre-dolar{
   color: white;
   font-weight: 800;
@@ -16,6 +33,12 @@
   width: 30%;
   margin-top: 40px;
 
+  background-repeat: no-repeat;
+  height: 100%;
+  background-position-x:center;
+  background-position-y:center;
+  background-size: cover;
+  
 }
 .center{
   margin-top: 10px;
@@ -23,12 +46,14 @@
 .login{
   width: 100%;
 }
+
 .logo {
-  height: 65px;
+  height: 55px;
   position: absolute;
   margin-left: 85px;
   margin-top: -27px;
   background-size: cover;
+  border-radius: 10px;
 }
 .msg-alerta{
   color: red;
@@ -192,10 +217,11 @@
 }
 
 @keyframes center_nom {
-  from { background: red; margin-top: 500px;}  
+  from { background: red; margin-top: 600px;}  
   to { background: rgb(11, 120, 245); margin-top: 0px;}
   
 }
+
 
 @media (max-width: 995px) {
   .profilebg{
@@ -204,6 +230,12 @@
   }
   .container{
     width: 50%;
+  }
+  .search{
+    height: 55px;
+    width: 40%;
+    margin: 20px;
+    margin-bottom: -30px;
   }
 }
 @media (max-width: 600px) {
@@ -217,6 +249,12 @@
   }
   .container{
     width: 70%;
+  }
+  .search{
+    height: 45px;
+    width: 70%;
+    margin: 20px;
+    margin-bottom: -30px;
   }
 }
 @media (max-width: 475px) {

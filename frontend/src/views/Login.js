@@ -15,12 +15,13 @@ import {
   ToastBody,
   ToastHeader,
 } from "reactstrap";
-import Electronica from "../assets/images/electronica.jpg";
+
 const Login = (props) => {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoggedin, setLoggedin] = React.useState(false);
+  const [back, setBack] = React.useState(false)
   const [mensaje, setmensaje] = React.useState("");
   localStorage.setItem("login", "No_logueado");
   const loginHandler = (ev) => {
@@ -29,13 +30,14 @@ const Login = (props) => {
       return;
     }
     localStorage.setItem("login", "Logueado");
-    if (username == "Administrador" && password == "Administrador") {
+    if (username == "mariemilys6@gmail.com" && password == "pablito") {
       return setTimeout(() => {
         navigate("/dashboard");
       }, 1000);
     }
     setmensaje("El usuario o contraseña son incorrectos");
 
+   
     /*try {
       fetch("http://localhost:4000/api/usuarios", {
         method: "POST",
@@ -56,6 +58,13 @@ const Login = (props) => {
       console.log(error);
     }*/
   };
+  const getStyle=()=>{
+    setBack(true)
+  }
+
+  useEffect(() => {
+    getStyle()
+  }, [])
  
 
   return (
@@ -74,7 +83,6 @@ const Login = (props) => {
                     type="text"
                     name="correo"
                     id="correo"
-                    placeholder="Correo"
                     onChange={(ev) => setUsername(ev.currentTarget.value)}
                     required
                   />
@@ -87,7 +95,6 @@ const Login = (props) => {
                     type="password"
                     name="password"
                     id="examplePassword"
-                    placeholder="don't tell!"
                     onChange={(ev) => setPassword(ev.currentTarget.value)}
                   />
                 </FormGroup>

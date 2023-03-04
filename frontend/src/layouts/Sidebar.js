@@ -83,7 +83,7 @@ const Sidebar = () => {
         </div>
         <div className="bg-dark text-white p-2 opacity-75">Mariemilys Herrera</div>
       </div>
-      <div className="p-3 mt-2">
+      <div className="p-2 mt-2">
         <Nav vertical className="sidebarNav">
           {navigation.map((navi, index) => (
             <NavItem key={index} className="sidenav-bg">

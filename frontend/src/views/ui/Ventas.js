@@ -28,10 +28,12 @@ import integrado from "../../assets/images/users/integrado.jpg";
 const Ventas = () => {
   const navigate = useNavigate();
   const [Ventas, setVentas] = useState([]);
+  const [searchVentas, setSearchVentas] = useState([]);
 
   const [estado, setEstado] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [modal, setModal] = useState(false);
+  const [buscar, setBuscar] = useState();
   const [modalcierreventa, setModalCierreventa] = useState(true);
   const [modaldetalles, setModalDetalles] = useState(false);
   const [infoVenta, setInfoVenta] = useState();
@@ -141,11 +143,18 @@ const Ventas = () => {
     });
     console.log(Venta);
   };
+  const onChangeSearch = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setBuscar({
+      [name]: value,
+    });
+  };
 
   const guardarDatos = async (e) => {
     //Crear la logica para la peticion post
     const newVenta = {
-      codigo: Venta.codigo,
+      codigo: (Venta.codigo).toLocaleLowerCase(),
       precio: Venta.precio,
       cantidad: Venta.cantidad,
       metodo_pago: Venta.metodo_pago,
@@ -171,6 +180,13 @@ const Ventas = () => {
 
     setVenta(valorInicial);
   };
+
+  useEffect(() => {
+    const arrayFilter = Ventas.filter((h) => h.codigo == buscar.buscar.trim().toLocaleLowerCase());
+    console.log(arrayFilter);
+    setSearchVentas(arrayFilter);
+  }, [buscar]);
+
   const modalDetalles = () => {
     return (
       <Modal isOpen={modaldetalles} toggle={toggleDetalles}>
@@ -357,7 +373,6 @@ const Ventas = () => {
                     name="usuario"
                     type="select"
                     onChange={capturarDatos}
-                    required
                   >
                     {usuarios.map((usua) => {
                       return (
@@ -379,9 +394,7 @@ const Ventas = () => {
                     onChange={capturarDatos}
                     required
                   >
-                    <option value="Retirado" >
-                    Retirado
-                        </option>
+                    <option value="Retirado">Retirado</option>
                     {/*estado.map((usua, index) => {
                       return (
                         <option value="Retirado" key={index}>
@@ -456,96 +469,197 @@ const Ventas = () => {
           </Row>
         </CardBody>
       </Card>
+
       {modalDetalles()}
       {modalNewVenta()}
 
       <Card>
         <CardHeader>FECHA DE HOY= {fecha}</CardHeader>
+        <Col>
+          <FormGroup>
+            <Input
+              id="buscar"
+              className="search"
+              name="buscar"
+              onChange={onChangeSearch}
+              placeholder="Buscar venta"
+              type="search"
+            />
+          </FormGroup>
+        </Col>
         <CardBody>
           <CardTitle tag="h5">Lista de Ventas</CardTitle>
 
-          <Table className="no-wrap align-middle" responsive borderless>
-            {Ventas.reverse() && Ventas.length ? (
-              <>
-                <thead>
-                  <tr>
-                    <th>CODIGO</th>
-                    <th>PRECIO($)</th>
-                    <th>CANTIDAD</th>
-                    <th>TOTAL</th>
-                    <th>METODO PAGO</th>
-                    <th>FECHA</th>
+          {searchVentas.length == 0 && (
+            <Table className="no-wrap align-middle" responsive borderless hover>
+              {Ventas.reverse() && Ventas.length ? (
+                <>
+                  <thead>
+                    <tr>
+                    <th>Num</th>
+                      <th>CODIGO</th>
+                      <th>PRECIO($)</th>
+                      <th>CANTIDAD</th>
+                      <th>TOTAL</th>
+                      <th>METODO PAGO</th>
+                      <th>FECHA</th>
 
-                    <th>VENDEDOR</th>
+                      <th>VENDEDOR</th>
 
-                    <th>ESTADO</th>
-                    <th>OPCIONES</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Ventas.map((ven, index) => (
-                    <tr key={index} className="border-top item">
-                      <td>
-                        <div className="d-flex align-items-center p-2">
-                          <img
-                            src={integrado}
-                            className="rounded-circle"
-                            alt={integrado}
-                            width="45"
-                            height="45"
-                          />
-                          <div className="ms-3">
-                            <p className="mb-0 name_pro">
-                              {ven.codigo?.toUpperCase()}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>{ven.precio}</td>
-                      <td>{ven.cantidad}</td>
-                      <td>
-                        {ven.total}$ ({ven.totalbs} Bs){" "}
-                      </td>
-                      <td>{ven.metodo_pago}</td>
-                      <td>{ven.fecha}</td>
-
-                      <td>{ven.vendedor}</td>
-
-                      <td>{ven.estado}</td>
-                      <td>
-                        <i
-                          class="bi bi-list menu_ventas"
-                          onClick={() =>
-                            toggleDetalles(
-                              ven.codigo,
-                              ven.precio,
-                              ven.cantidad,
-                              ven.metodo_pago,
-                              ven.fecha,
-                              ven.cliente,
-                              ven.vendedor,
-                              ven.total,
-                              ven.totalbs,
-                              ven.estado,
-                              ven.descripcion
-                            )
-                          }
-                        ></i>
-                         
-
-                        <i
-                          class="bi bi-trash icon_icono"
-                          onClick={() => deleteVenta(ven._id)}
-                        ></i>
-                      </td>
+                      <th>ESTADO</th>
+                      <th>OPCIONES</th>
                     </tr>
-                  ))}
-                </tbody>{" "}
-              </>
-            ) : (
-              <div className="sin-register">No hay registro de ventas</div>
-            )}
-          </Table>
+                  </thead>
+                  <tbody>
+                    {Ventas.map((ven, index) => (
+                      <tr key={index} className="border-top item">
+                        <td className="num">{index+1}</td>
+                        <td>
+                          <div className="d-flex align-items-center p-2">
+                            <img
+                              src={integrado}
+                              className="rounded-circle"
+                              alt={integrado}
+                              width="45"
+                              height="45"
+                            />
+                            <div className="ms-3">
+                              <p className="mb-0 name_pro">
+                                {ven.codigo?.toUpperCase()}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{ven.precio}</td>
+                        <td>{ven.cantidad}</td>
+                        <td>
+                          {ven.total}$ ({ven.totalbs} Bs){" "}
+                        </td>
+                        <td>{ven.metodo_pago}</td>
+                        <td>{ven.fecha}</td>
+
+                        <td>{ven.vendedor}</td>
+
+                        <td>{ven.estado}</td>
+                        <td>
+                          <i
+                            class="bi bi-list menu_ventas"
+                            onClick={() =>
+                              toggleDetalles(
+                                ven.codigo,
+                                ven.precio,
+                                ven.cantidad,
+                                ven.metodo_pago,
+                                ven.fecha,
+                                ven.cliente,
+                                ven.vendedor,
+                                ven.total,
+                                ven.totalbs,
+                                ven.estado,
+                                ven.descripcion
+                              )
+                            }
+                          ></i>
+
+                          <i
+                            class="bi bi-trash icon_icono"
+                            onClick={() => deleteVenta(ven._id)}
+                          ></i>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>{" "}
+                </>
+              ) : (
+                <div className="sin-register">No hay registro de ventas</div>
+              )}
+            </Table>
+          )}
+          {searchVentas.length >= 1 && (
+            <Table className="no-wrap align-middle" responsive borderless hover>
+              {searchVentas.length ? (
+                <>
+                  <thead>
+                    <tr>
+                    <th>Nº</th>
+                      <th>CODIGO</th>
+                      <th>PRECIO($)</th>
+                      <th>CANTIDAD</th>
+                      <th>TOTAL</th>
+                      <th>METODO PAGO</th>
+                      <th>FECHA</th>
+
+                      <th>VENDEDOR</th>
+
+                      <th>ESTADO</th>
+                      <th>OPCIONES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchVentas.map((ven, index) => (
+                      <tr key={index} className="border-top item">
+                         <td className="num">{index+1}</td>
+                        <td>
+                          <div className="d-flex align-items-center p-2">
+                            <img
+                              src={integrado}
+                              className="rounded-circle"
+                              alt={integrado}
+                              width="45"
+                              height="45"
+                            />
+                            <div className="ms-3">
+                              <p className="mb-0 name_pro">
+                                {ven.codigo?.toUpperCase()}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{ven.precio}</td>
+                        <td>{ven.cantidad}</td>
+                        <td>
+                          {ven.total}$ ({ven.totalbs} Bs){" "}
+                        </td>
+                        <td>{ven.metodo_pago}</td>
+                        <td>{ven.fecha}</td>
+
+                        <td>{ven.vendedor}</td>
+
+                        <td>{ven.estado}</td>
+                        <td>
+                          <i
+                            class="bi bi-list menu_ventas"
+                            onClick={() =>
+                              toggleDetalles(
+                                ven.codigo,
+                                ven.precio,
+                                ven.cantidad,
+                                ven.metodo_pago,
+                                ven.fecha,
+                                ven.cliente,
+                                ven.vendedor,
+                                ven.total,
+                                ven.totalbs,
+                                ven.estado,
+                                ven.descripcion
+                              )
+                            }
+                          ></i>
+
+                          <i
+                            class="bi bi-trash icon_icono"
+                            onClick={() => deleteVenta(ven._id)}
+                          ></i>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>{" "}
+                </>
+              ) : (
+                <div className="sin-register">No hay registro de ventas</div>
+              )}
+            </Table>
+          )}
         </CardBody>
       </Card>
     </div>
